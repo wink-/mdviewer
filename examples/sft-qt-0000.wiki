@@ -1,0 +1,505 @@
+'''Title: QUALITY PROCEDURE'''
+
+'''Number: SFT-QT-0000'''
+
+'''Revision: 1.0.3'''
+
+=== Introduction and Scope ===
+====Introduction====
+Surface Finish Technologies, hereafter referred to as "SFT", has developed and implemented a Quality Management System (QMS) in order to document the company's best business practices, better satisfy the requirements and expectations of its customers and to improve the overall management of the company.
+
+The Quality Management System of SFT meets the requirements of the aerospace standard AS9003A. This system addresses the management and production of the company's products and services.
+
+This manual describes the Quality Management System, delineates authorities, inter relationships and responsibilities of the personnel responsible for performing within the system. The manual also provides procedures or references for all activities comprising the Quality Management System to ensure compliance to the necessary requirements of the standards.
+
+==== Scope  ====
+
+This manual covers the surface finishing business and operations taking place within the SFT organization. It incorporates instructions, procedures, and information necessary for providing proper metal finishing at our facility.
+
+This manual identifies and documents a common Quality Management System (QMS) which is designed to incorporate the needs of our customers and/or regulatory agencies and uses AS9100C as its foundation. SFT's vision is to use the QMS to provide a framework for promoting best practices and consistent processes. Identified processes and procedures which can effectively improve the QMS will be added as appropriate.
+
+==== SFT Quality Policy  ====
+
+It is SFT's mission to be a premier metal finishing company dedicated to providing profitable value added services to our customers through the development of mutually beneficial partnerships. SFT is committed to customer satisfaction, quality leadership, employee development, requirement compliance, and the continual improvement of its management systems, processes and services.
+
+==== Exclusions  ====
+
+Due to the nature of the organization and its products and services, SFT is excluded from compliance to the requirements of section 7.3 and section 7.5.1.4 of AS9100C. SFT does not perform any design work and currently does not have any contractual requirement to supply post-delivery support.
+
+This exclusion does not affect the ability or responsibility of SFT to provide products and services that meet customer and applicable statutory and regulatory requirements.
+
+=== Reference Documents  ===
+
+The latest revisions of the following standards and specifications will form a part of this document as indicated herein.
+
+:ISO 9000:2005 Quality Management Systems / Fundamentals and Vocabulary 
+
+:ISO 9001:2008 Quality Management Systems / Requirements 
+
+:AS9100C Quality Management Systems / Requirements for Aviation, Space and Defense Organizations
+
+:AS9003, Rev. A. Inspection & Test Quality Systems, Requirements for Aviation, Space & Defense Contractors
+
+:{| class="wikitable"
+! scope="col" | SFT Procedure Number !! scope="col" | Title !! scope="col" |SFT QM Section!! scope="col" | AS9100C Section
+|-
+! scope="row" | [[SFT-CAL-0001]]
+| Calibration System || [[SFT-QT-0000#Control_of_Measuring_.26_Monitoring_Devices|9.6]] || 7.6
+|-
+! scope="row" | [[SFT-ENG-0001]]
+| Contract Review || 9.1, 9.2 || 7.1, 7.2
+|-
+! scope="row" | [[SFT-ENG-0006]]
+| Risk Management || 9.1.2 || 7.1.2
+|-
+! scope="row" | [[SFT-MANAG-0001]]
+| Management Review ||7.6 || 5.6
+|-
+! scope="row" | [[SFT-PURCH-0001]]
+| Purchasing || 9.4 || 7.4
+|-
+! scope="row" | [[SFT-QT-0003]]
+| Control of Noncomforming Product || 10.3 || 8.3
+|-
+! scope="row" | [[SFT-QT-0004]]
+| Document Control || 6.3 || 4.2.3
+|-
+! scope="row" | [[SFT-QT-0005]]
+| Control of Records || 6.4 || 4.2.4
+|-
+! scope="row" | [[SFT-QT-0007]]
+| Product Realization || 9 || 7
+|-
+! scope="row" | [[SFT-QT-0008]]
+| Internal Audits || 10.2.2 || 8.2.2
+|-
+! scope="row" | [[SFT-QT-0009]]
+| Corrective Action || 10.5.2 || 8.5.2
+|-
+! scope="row" | [[SFT-QT-0010]]
+| Preventative Action || 10.5.3 || 8.5.3
+|-
+! scope="row" | [[SFT-QT-0014]]
+| Configuration Management || 9.1.3 || 7.1.3
+|-
+|}
+
+=== Terms &amp; Definitions  ===
+
+Unless otherwise noted, SFT uses the same internationally recognized terms, vocabulary, and definitions given in AS9003, ISO 9000:2005, ISO 9001:2008, and AS9100.
+
+*'''Documented Procedure''' means an established, documented, implemented, and maintained procedure.
+
+=== SFT Quality Management System  ===
+
+==== General Requirements  ====
+
+SFT has established, documented, implemented, and maintains a Quality Management System and continually improves its effectiveness in accordance with the requirements of AS9100C. Furthermore. SFT addresses customer and applicable statutory and regulatory quality management system requirements.
+
+
+SFT has: 
+*Identified the processes needed for the QMS and their applications throughout the organization. 
+*Determined the sequence and interaction of these processes. 
+*Determined criteria and methods needed to ensure that both the operation and control of these processes are effective. 
+*Ensured the availability of resources and information necessary to support the operation and monitoring of these processes. 
+*Monitored, measured, where applicable, and analyzed these processes. 
+*Implemented actions necessary to achieve planned results and continual improvement of these processes. 
+A list of metal finishing processes performed at SFT can be found on SFT's website located at [[http://www.surfacefinishtech.com surfacefinishtech.com]].
+
+[[Image:Quality System Process Map.PNG]] 
+
+==== Documentation Requirements  ====
+
+===== General  =====
+
+SFT maintains all required documentation to effectively sustain its QMS. Management is responsible for implementation of procedures and records as required by the QMS. In order to ensure that all work undertaken conforms to specification requirements, a documented quality system has been developed. The system is structured in four levels.
+
+
+:*Level 1: Quality Manual
+
+:*Level 2: Procedures
+
+:*Level 3: Work Instructions
+
+:*Level 4: Forms, Data &amp; Records
+
+
+SFT maintains a secure intranet that allows authorized users to access documents as needed throughout the facilities. Obsolete documents are identified as such and discarded or stored separately to prevent unintended use.
+
+===== Quality Manual and Procedures  =====
+
+The primary purpose of the quality manual and QMS procedures is to describe and document the quality management system in place and to define all the QMS processes in use. This manual is issued under the authority of top management.
+
+
+Copies of the manual are controlled as described herein. Uncontrolled copies may be distributed as requested and are identified as "Uncontrolled". The manual is meant to be used by employees as the primary source of official SFT quality policies. This manual is accessible to customers, regulatory authorities and third parties that wish to verify SFT's quality management system. Externally distributed copies will be uncontrolled and not subject to revision notification unless otherwise agreed.
+
+
+Additional procedures and work instructions have been developed to further clarify specific instructions for the execution of these procedures. Where subordinate documents are referenced, they are shown in '''''bold italics'''''.
+
+
+Management or a designated Management Representative is responsible for control and distribution of this manual and all other controlled documentation within the QMS. The latest revision of this document is located on the SFT intranet (SFTWiki). Users shall verify the latest revision before use.
+
+==== Control of Documents  ====
+Documents are controlled so that the information on them is accessible, legible and suitably maintained. Documents are reviewed and approved prior to release and only the latest revisions are available to users. Previous revisions are segregated and retained electronically. Only authorized employees can amend the Quality Management System's documentation. Control of documents is defined in [[SFT-QT-0004]], '''''Document Control'''''.
+
+==== Control of Records  ====
+Records are required to show the effective operation of the QMS. Procedures to identify, collect, index, store, and maintain quality records are defined in [[SFT-QT-0005]], '''''Control of Records'''''. Where identified by customers and regulatory agencies, records are available for their review. When applicable, records shall be retained in a database.
+
+=== Management Responsibility  ===
+
+==== Management Commitment  ====
+
+Management at all levels are responsible for demonstrating their commitment to the ongoing maintenance and improvement of the QMS. This is accomplished through: 
+
+#Establishing quality policies and objectives 
+#Communicating to the organization the importance of meeting customer as well as statutory and regulatory requirements. 
+#Ensuring necessary resources are available 
+<!--#Conducting management reviews. -->
+
+<!--All employees of SFT are responsible to perform in accordance with the SFT QMS.-->
+
+==== Customer Focus  ====
+
+The primary goal is to satisfy customers. Management ensures that customer needs and expectations are determined and achieved. Management shall measure compliance and on-time delivery and take appropriate action if planned results are not achieved.
+
+==== Quality Policy  ====
+
+Management shall ensure that the quality policy
+
+:*Is appropriate to the purpose of the organization 
+:*Includes a commitment to comply with requirements and continually improve effectiveness of the quality management system 
+:*Provides a framework for establishing and reviewing quality objectives 
+:*Is communicated and understood within the organization 
+<!--:*Is reviewed for continuing suitability-->
+
+==== Planning  ====
+
+===== Quality Objectives  =====
+
+:Management is responsible for establishing top level quality objectives and measurements. These objectives are established during the '''annual''' strategic planning processes and are radiated though SFT to the applicable areas. Quality objectives and measures are defined in support of the Quality Policy and are documented in the SFTwiki database'''&nbsp;'''under the QualityObjectives section.
+
+===== Quality Management System Planning  =====
+
+:The planning of the QMS was accomplished in order to comply with the general requirements of the QMS-GENERAL REQUIREMENTS section of this document, as well as the quality objectives. Managements duty is to ensure the integrity of the QMS when changes are planned and implemented.
+
+<br> 
+
+==== Responsibility, Authority, and Communication  ====
+
+===== Responsibility and Authority  =====
+
+:Management ensures that functions and interrelations are identified. Management defines responsibilities and authorities and communicates them within the company through organizational charts (see Appendix A), job descriptions,department meetings, and shop procedures.
+
+:'''President, Secretary/Treasurer and CFO:''' 
+::Responsible for ensuring the proper implementation of the quality management system, as well as, for overseeing the maintenance of the system, reporting on its effectiveness during management review, and discussion of matters relating to the QMS with customers, registrars and other concerned parties.
+
+:'''Second Tier:''' 
+::Includes Engineering &amp; Estimating, Production, Shipping &amp; Receiving, Purchasing, Quality Assurance, and Facilities Maintenance leads. Ensure QMS polices are communicated and reported upon.
+
+:Product or process nonconformities are promptly reported to Management who is responsible for assuring the corrective action. When action is needed to correct quality, the person responsible for the quality of the process may stop production. Each shift has a shift supervisor who is responsible for product quality.
+
+===== Management Representative  =====
+
+:The President has selected the Quality Assurance Manager as the Management Representative. Irrespective of other responsibilities, the QA Manager also has the responsibility and authority that includes: 
+::*Resolving QMS matters with unrestricted access to top management. 
+::*Ensuring the processes needed for the QMS are established, implemented, and maintained. 
+::*Reporting to top management on the performance of the QMS and any need for improvement. 
+::*Communicating customer requirements to the applicable areas throughout the organization.
+
+===== Internal and External Communication  =====
+
+:Internal:
+
+:Top management is responsible for ensuring that appropriate communication processes are established and that communication takes place regarding the effectiveness of the QMS.
+
+:External:
+
+:The president is responsible for external communication in case of incidents and for communication with local authorities. The president will ensure that customers and regulatory authority representatives can obtain access to relevant documentation, when requested.
+
+<br> 
+
+==== Management Review  ====
+
+===== General  =====
+
+:The Management Representative is responsible for conducting management reviews of the QMS at least annually to ensure continued suitability, adequacy, and effectiveness. This review shall include assessing opportunities for improvement and the need for changes to the QMS, including quality objectives and the quality policy. Records for management reviews are maintained. Management review is defined in [[SFT-MANAG-0001]], '''''Management Review'''''.
+
+===== Review Input  =====
+
+:These are the standard inputs for the QMS Management Review. Besides the standard inputs, an employee can add other related inputs. Records of all such reviews shall be recorded. 
+::*review of quality objectives, policies, and targets 
+::*status of corrective actions 
+::*status of preventative actions 
+::*process performance 
+::*product conformity 
+::*results of audits and assessments 
+::*results of on-time delivery performance 
+::*follow-up actions from previous management reviews 
+::*changes that could affect the QMS 
+::*customer feedback 
+::*recommendations for improvement
+
+===== Review Output  =====
+
+:The output from the management review will include decisions and actions related to improvement of the effectiveness of the QMS and its processes and improvement of product related to customer requirements. The adequacy of needed resources will also be addressed.
+
+<br> 
+
+=== Resource Management  ===
+
+==== Provision of Resources  ====
+
+:Management is responsible for the planning and deployment of resources to achieve the goals of the QMS, continually improve its effectiveness, and enhance customer satisfaction by meeting customer requirements. Resource requirements are defined and reviewed during the Management Review process. Resources include human resources, technological resources, environmental resources, and financial resources.
+
+==== Human Resources  ====
+
+===== General  =====
+
+:Management is responsible for identifying and assigning personnel based on appropriate education, training, skills, and experience.
+
+===== Competence, Awareness, and Training  =====
+
+Management has determined the necessary competence for personnel performing work affecting conformity to product requirements and where applicable, training has been provided to achieve the necessary competence. Annual reviews are conducted to assess and manage the training requirements and competency of personnel performing work affecting conformity to product requirements. Personnel are informed of the relevance and importance of their activities and how they contribute to the achievement of the quality objectives. Records of education, training, skills and experience are maintained.
+:*Training - SFT's greatest asset is the experience of their employees. Some of which have over 20 years experience in the plating business. New hires are assigned to work with experienced employees for On The Job (OTJ) Training.
+
+==== Infrastructure  ====
+
+:SFT has determined and provides and maintains the infrastructure necessary to achieve conformity of products and services. This infrastructure includes but is not limited to: 
+::*buildings, work space, and utilities 
+::*hardware, software, and processing equipment 
+::*support systems (e.g. communication, maintenance, information, transport)
+
+==== Work Environment  ====
+
+SFT provides an appropriate work environment needed to achieve conformity of product. Work sites shall be clean and orderly as to be appropriate for the products and services being produced.
+
+=== Product Realization  ===
+
+==== Planning of Product Realization  ====
+
+:Management has planned and developed the processes needed for product realization and in doing so, has ensured that the processes are consistent with the requirements of the other processes within the QMS. Planning includes the following:
+
+:Quality objectives and requirements for product with consideration of aspects such as product and personal safety, reliability, availability and maintainability, produceability and inspectability, suitability of parts and materials used in the product, selection and development of embedded software, and recycling or final disposal of the product at the end of its life, the need to establish processes and documents, and to provide resources specific to the product, required verification, validation, monitoring, measurement, inspection and test activities specific to the product and the criteria for product acceptance, records needed to provide evidence that the realization processes and resulting product meet requirements, configuration management appropriate to the product, and resources to support the use and maintenance of the product. &nbsp;The output of the planning can be the job traveler/work order, related drawings, inspection packages, operator check sheets, specifications that show dimensions, characteristics, tolerances, and any key characteristics identified by the customer or any combination thereof.
+
+===== Project Management  =====
+
+:As appropriate to SFT and the product, SFT plans and manages product realization in a structured controlled manner. Resource needs and schedule constraints are considered and adjusted as needed. Appropriate actions are taken to mitigate risks as they are determined.
+
+===== Risk Management  =====
+
+:Management is responsible for risk management and taking action to mitigate risks. Factors such as labor, equipment, material, and scheduling are identified throughout contract review, purchasing, planning, production, and inspection processes. Documents are created or revised, meetings are held, and instructions are issued as needed to address and communicate risks that have been identified. Prior to acceptance of contract or purchase order, relevant risk criteria are assessed to identify risk and determine feasibility. Criteria may include but are not limited to:
+
+::Engineering data (e.g., drawings, models, specifications, etc.), customer supplied quality requirements, configuration plan, quantity and delivery schedule, requirement for customer approved suppliers, lead time and cost for raw material and/or hardware items, cost of any non-recurring changes, labor hours and skill, equipment (e.g., tooling, fixtures, and resources), inspection and test plans, and any special requirements and expectations not stated. If there are any risks identified that exceed the initially defined risk acceptance criteria, then management will re-examine the risk criteria and determine actions necessary to mitigate those risks. Any risks remaining after the implementation of mitigating actions will be assessed to determine if those risks can be accepted. 
+:Risk Management is defined in [[SFT-ENG-0006]], '''''Risk Management'''''.
+
+===== Configuration Management  =====
+
+:Configuration management includes planning, identification, change control, status accounting, and auditing. &nbsp;Configuration audits are conducted during internal audits. &nbsp;Part configuration is provided in the customer's engineering specifications. Configuration is identified on the shop traveler and subsequent shipping documents. &nbsp;When product requirements change, the manufacturing plan is revised and appropriate personnel are informed of the change. &nbsp;Configuration Management is defined in SFT-QT-0014, ''Configuration Management''.
+
+===== Control of Work Transfers  =====
+
+:SFT ensures the conformity of work transferred to an external source by requiring the following:
+
+:The outsourced service provider must be an approved, evaluated supplier according to the requirements of the PURCHASING section of this document. The supplier is required to notify SFT of any process changes, any nonconformities, or other issues. The supplier will be subject to the corrective action system, as defined in the CORRECTIVE ACTION section of this document. Work must be conducted on the article(s) according to any specifications listed on the purchase order. This process is controlled through purchasing and resultant receiving documentation. Product and quality requirements are flowed down in purchase orders as described in the PURCHASING INFORMATION section of this document.
+
+==== Customer Related Processes  ====
+
+===== Determination of Requirements Related to the Product  =====
+
+:SFT captures all contractual and special requirements, monitoring and measurement requirements, applicable statutory or regulatory requirements, and/or any necessary, unstated requirements as part of the contract review process.
+
+===== Review of Requirements Related to the Product  =====
+
+:Once contractual and special requirements are captured and risks are determined, they are reviewed against previous contract or order requirements and differences are resolved. Relevant documents are changed as requirements change.
+
+:Where the customer provides no documentation statement of requirement, the customer requirements shall be confirmed by requesting customer approval of quote or by feedback through electronic communications or phone.
+
+:Where product requirements are changed after work has begun, SFT shall ensure that relevant documents are amended and that relevant personnel are made aware of the changes.
+
+===== Customer Communication  =====
+
+:SFT determines and implements effective arrangements for communicating with customers in relation to product information, inquiries, contracts or order handling (including amendments), and customer feedback (including customer complaints).
+
+==== Design and Development  ====
+
+:SFT takes exclusion to design and development requirements since it does not perform any design or development functions.
+
+==== Purchasing  ====
+
+===== Purchasing Process  =====
+
+:SFT ensures purchased products or services conform to specified purchase requirements as defined in the purchase order and referenced documents. The controls applied to the supplier and to the purchased product or service vary, dependent on the effect of the purchased product or service on SFT product. SFT accepts responsibility for the conformity of products that are purchased from suppliers including product from sources defined by the customer. One factor that can be used by SFT during supplier selection and evaluation is supplier quality data from an objective and reliable external source, however SFT still remains responsible for verifying that purchased product meets specified purchase requirements. Supplier selection and evaluation is defined in [[SFT-PURCH-0001]], ''Purchasing''.
+
+:The purchasing process ensures SFT manages risk when selecting and using suppliers and only purchases materials and services from suppliers and subcontractors that have undergone evaluation and approval.
+
+===== Purchasing Information  =====
+
+:SFT's purchasing documents shall clearly describe the products or services being purchased.&nbsp; Including where appropriate: 
+::*requirements for approval of product, procedures, processes, and equipment 
+::*identification (including revision) of specifications, drawings, process requirements, inspection/verification instructions and other technical information 
+::*requirements for qualification of personnel 
+::*quality management system requirements 
+::*requirements for test specimens for design approval, inspection/verification, investigation, or auditing 
+::*requirements for design, test, inspection, verification (including production process verification), use of statistical techniques for product acceptance, and related instructions for acceptance by SFT, and as applicable critical items including key characteristics 
+::*requirements regarding the need for the supplier to notify SFT of nonconforming product, obtain SFT approval for nonconforming product disposition, notify SFT of changes in product and/or process, changes of suppliers, changes of manufacturing facility location and, where required, obtain SFT approval, and flow down to the supply chain the applicable requirements including customer requirements 
+::*records retention requirements 
+::*right of access by SFT, their customer and regulatory authorities to applicable areas of all facilities, at any level of the supply chain, involved in the order and to all applicable records
+
+:SFT shall ensure the adequacy of specified purchase requirements prior to their communication to the supplier.
+
+===== Verification of Purchased Product  =====
+
+:SFT plans for verification of purchased products to determine that they meet the specifications of purchase. The verification may include one or more of the following: 
+::*incoming inspection 
+::*documentation review 
+::*receipt of and review of evidence of quality of the product via the likes of test reports or certificates of compliance. 
+::*delegation of inspection to supplier or certification by supplier 
+::*inspection and audit at supplier premises 
+:Incoming material released without verification is recorded to allow for a recall and replacement. In the case where verification is delegated to the supplier, criteria for verification activities and reporting are to be explicitly stated prior to submission of purchasing documents to said supplier.
+
+==== Production and Service Provision  ====
+
+===== Control of Production and Service Provision  =====
+
+:SFT establishes and maintains controlled conditions for performing and verifying production. These controlled conditions include: 
+::*information describing the product (e.g. drawings, materials, and process specifications) 
+::*work instructions (e.g. work orders, process flow charts, process cards, WIPSYS, and, inspection documents) 
+::*use of suitable equipment (e.g., product specific tools and software programs) 
+::*the availability and use of monitoring and measuring equipment 
+::*the implementation of monitoring and measurement 
+::*the implementation of product release, delivery and post-delivery activities 
+::*accountability for all product during production (e.g., parts quantities, split orders, nonconforming product) 
+::*evidence that all production and inspection/verification operations have been completed as planned, or as otherwise documented and authorized 
+::*provisions for the prevention, detection and removal of foreign objects 
+::*monitoring and control of utilities and supplies (e.g., water, compressed air, electricity, chemical products) to the extent they affect conformity to product requirements 
+::*criteria for workmanship whether it be written standards, representative samples, or illustrations
+
+:Planning considers, as applicable:
+
+::*establishing, implementing, and maintaining appropriate processes to manage critical items, including process controls where key characteristics have been identified 
+::*designing, manufacturing, and using tooling to measure variable data 
+::*identifying in-process inspection/verification points when adequate verification of conformance cannot be performed at later stages of realization 
+::*special processes
+
+===== Production Process Verification  =====
+
+:SFT provides for the inspection, verification, and documentation of a representative item from the first production run of a new part or assembly to verify that the production processes, production documentation, and tooling are capable of producing parts and assemblies that meet requirements. This process shall be repeated when changes occur that invalidate the original results.
+
+===== Control of Production Process Changes  =====
+
+:Only management is authorized to approve changes to production processes. SFT controls and documents changes affecting processes, production equipment, tools, or software programs. Results of changes to production processes are assessed to confirm that the desired effect has been achieved without adverse effects to product conformity.
+
+===== Control of Production Equipment, Tools, and Software Programs  =====
+
+:Production equipment, tools, and software programs used to automate and control/monitor product realization processes, will be validated prior to release for production and will be monitored. Storage requirements, including periodic preservation/condition checks, will be defined for production equipment or tooling in storage.
+
+===== Post-Delivery Support  =====
+
+:SFT currently has no contractual requirements relating to post-delivery support. Therefore, SFT takes exclusion from section 7.5.1.4 of AS9100C. This exclusion does not affect the ability or responsibility of SFT to provide product that meets customer and applicable regulatory requirements.
+
+===== Validation of Processes for Production and Service Provision  =====
+
+:SFT validates processes where resulting output cannot be verified by subsequent measurement or monitoring, and as a consequence, deficiencies become apparent only after the product is in use.
+
+:SFT shall specify arrangements for these processes including, as applicable defined criteria for review and approval of the process approval of equipment and qualification of personnel use of specific methods and procedures requirements for records, and re-validation. Process validation is defined in [[SFT-QT-0007]], ''Product Realization''.
+
+===== Identification and Traceability  =====
+
+:Product is identified by suitable means throughout product realization. SFT maintains the identification of the configuration of the product in order to identify any differences between the actual configuration and the agreed configuration. Product status with respect to monitoring and measuring requirements is identified. When acceptance authority media are used (e.g., stamps, passwords, and electronic signatures) SFT has established appropriate controls for the media. Where traceability is a requirement, SFT controls the unique identification of the product and maintains records.
+
+:SFT's system provides for: identification to be maintained throughout processing, the ability to trace all products processed from the same processing batch to the destination (e.g., delivery, scrap), the ability to trace its components to the assembly for a product, and a sequential record of its production to be retrievable.
+
+===== Customer Property  =====
+
+:SFT exercises care with customer property while it is in SFT's control or use. SFT identifies, verifies, and protects customer supplied data, materials, equipment, and intellectual property. Customer property which is lost, damaged, or found unsuitable for use is recorded and reported to the customer.
+
+===== Preservation of Product  =====
+
+:SFT preserves the product during internal processing and delivery to the intended destination in order to maintain conformity to requirements. As applicable, preservation shall include identification, handling, packaging, storage, and protection. Where applicable, preservation includes provisions for: 
+::*cleaning 
+::*prevention, detection and removal of foreign objects 
+::*handling of sensitive products 
+::*marking and labeling 
+::*controlling shelf life and rotation of stock 
+::*handling of materials which may be hazardous
+
+==== Control of Measuring &amp; Monitoring Devices  ====
+
+:SFT shall determine the measuring and monitoring to be undertaken and the equipment needed to provide evidence of conformity of the product to the requirements. SFT maintains a list of monitoring and measuring equipment and defines the process employed for their calibration/verification including details of equipment type, unique identification, location, frequency of checks, check method and acceptance criteria. Monitoring and measuring equipment includes, but is not limited to: test hardware, test software, automated test equipment and plotters used to produce inspection data. It also includes personally owned and customer supplied equipment used to provide evidence of product conformity. SFT has established processes to ensure that monitoring and measurement can be carried out and are carried out in a manner that is consistent with the monitoring and measurement requirements (see [[SFT-CAL-0001]], ''Calibration System''). SFT ensures that environmental conditions are suitable for the calibration, inspection, measurement, and testing being carried out.
+
+::Where necessary to ensure valid results, measuring and monitoring devices are to be: 
+::*calibrated or verified at specific intervals or prior use, against measurement standards traceable to international or nationals measurement standards; where no such standards exists, the basis used for calibration or verification shall be recorded 
+::*adjusted or re-adjusted as necessary 
+::*identified in order to determine its calibration status 
+::*safeguarded from adjustments that would invalidate measurement results 
+::*protected from damage and deterioration during handling, maintenance, and storage 
+::*recalled through a system which provides a listing of items due for calibration or certification 
+:SFT assesses and records the validity of the previous measuring results when the equipment is found not to conform to the requirements. SFT takes appropriate action on the equipment and any product affected. Records of the results of calibration and verification are maintained. When used in the monitoring and measurement of specified requirements, the ability of computer software to satisfy the intended application is confirmed. This is undertaken prior to initial use and reconfirmed as necessary.
+
+<br> 
+
+=== Measurement, Analysis, and Improvement  ===
+
+==== General  ====
+
+:SFT plans and implements the monitoring, measurement, analysis, and improvement processes needed to&nbsp;<span style="line-height: 1.5em;">demonstrate conformity to product requirements and&nbsp;</span><span style="line-height: 1.5em;">ensure the conformity and&nbsp;</span><span style="line-height: 1.5em;">continually improve the effectiveness of the QMS. &nbsp;This includes determination of applicable methods, including statistical techniques, and the extent of their use.</span>
+
+==== Monitoring and Measurement  ====
+
+===== Customer Satisfaction  =====
+
+:SFT shall monitor information relating to customer perception as to whether it has met customer requirements. Information used for the evaluation of customer satisfaction shall include, but is not limited to, product conformity,on-time delivery, customer complaints, and corrective action requests. SFT develops and implements plans for customer satisfaction improvement that address deficiencies identified by these evaluations, and assess the effectiveness of the results.
+
+===== Internal Audit  =====
+
+:SFT conducts internal audits at planned intervals to determine whether the QMS conforms to planned arrangements, to the requirements of AS9100C and to the QMS requirements established by SFT, and is effectively implemented and maintained. When identified by customer contract or regulatory requirements, internal audits are conducted in accordance with those requirements.Internal audits are performed in accordance with [[SFT-QT-0008]], ''Internal Audits''.
+
+===== Monitoring and Measurement of Processes  =====
+
+:SFT defines, plans, and implements appropriate monitoring and measurement activities to achieve planned performance. Corrective action is taken when planned results are not achieved. In the event of a corrective action for a non-conformance, determination is made as to the potential effects on product conformity.
+
+:In the event of process nonconformity, SFT takes appropriate action to correct the nonconforming process, evaluates whether the process nonconformity has resulted in product nonconformity, determines if the process nonconformity is limited to a specific case or whether it could have affected other processes or products, identifies and controls any nonconforming product.
+
+===== Monitoring and Measurement of Product  =====
+
+:SFT monitors and measures key characteristics of the product to verify that product requirements have been met. This is carried out at appropriate stages of the product realization process in accordance with planned arrangements. &nbsp;Evidence of conformity with the acceptance criteria is maintained. Measurement requirements will include:
+
+::*acceptance and rejection criteria 
+::*where in the process measurement and testing operations are to be performed 
+::*records of inspection and test results and an indication of acceptance or rejection 
+::*information on specific measurement instruments required and any specific instructions associated with their use
+
+:When critical items, including key characteristics, have been identified SFT ensures they are monitored and controlled in accordance with established processes. When SFT uses sampling inspection as a means of product acceptance, the sampling plan is justified on the basis of recognized statistical principles and appropriate for use. Product is not to be released until it has been inspected or otherwise verified as conforming to specified requirements. Where required, inspection and test data is recorded and the record is maintained to demonstrate product compliance to customer requirements. The organization shall indicate the person(s) authorizing the release of product for delivery to customer. Product release and delivery will not proceed until all the planned arrangements have been satisfactorily completed, unless otherwise approved by a relevant authority, and where applicable by the customer. SFT ensures that all documents required to accompany the product are present at time of delivery.
+
+==== Control of Nonconforming Product  ====
+
+:SFT ensures that nonconforming products are identified and controlled to prevent unintended use or delivery. The responsibilities, authorities, and procedures for controlling nonconforming product are defined in [[SFT-QT-0003]], ''Control of Nonconforming Product''.
+
+==== Analysis of Data  ====
+
+:SFT determines, collects, and analyzes appropriate data to demonstrate the suitability and effectiveness of the QMS and to evaluate where continual improvement of the effectiveness of the QMS can be made. This includes data generated as a result of monitoring and measurement and from relevant sources. The analysis of data provides information relating to:
+
+::*customer satisfaction 
+::*conformity of product requirements 
+::*characteristics and trends of processes, products, and opportunities for preventative action 
+::*suppliers
+
+==== Improvement  ====
+
+===== Continual Improvement  =====
+
+:SFT utilizes process improvement methodologies to continuously improve the effectiveness of the QMS. The effectiveness of the QMS is improved through use of the quality policy, quality objectives, audit results, analysis of data, corrective and preventative actions, and management review. SFT monitors the implementation of improvement activities and evaluates the effectiveness of the results.
+
+===== Corrective Action  =====
+
+:SFT establishes and maintains procedures for eliminating the cause of nonconformities in order to prevent recurrence. Corrective action procedures are defined in [[SFT-QT-0009]], ''Corrective Action''. Corrective actions are appropriate to the effects of the nonconformities encountered.
+
+===== Preventive Action  =====
+
+:SFT establishes and maintains procedures for eliminating the cause of potential nonconformities. Preventive action procedures are defined in [[SFT-QT-0010]], ''Preventive Action''. Preventive actions are appropriate to the effects of the potential problems.
+
+=== Appendices  ===
+
+==== Appendix A: Organizational Chart  ====
+
+[[Image:Orgchart.png]]

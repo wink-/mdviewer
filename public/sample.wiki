@@ -1,0 +1,100 @@
+== Sample Wiki Page ==
+
+This is a sample '''MediaWiki''' (Wikitext) page to demonstrate the viewer capabilities.
+
+=== Text Formatting ===
+
+You can make text '''bold''' using three apostrophes.
+
+You can make text ''italic'' using two apostrophes.
+
+You can make text '''''bold and italic''''' using five apostrophes.
+
+=== Lists ===
+
+; Unordered list:
+* Item 1
+* Item 2
+** Nested item 2.1
+** Nested item 2.2
+* Item 3
+
+; Ordered list:
+# First item
+# Second item
+## Nested item 2.1
+## Nested item 2.2
+# Third item
+
+; Definition list:
+; Term 1 : Definition 1
+; Term 2 : Definition 2
+
+=== Links ===
+
+External link: https://example.com
+
+External with text: [https://github.com GitHub]
+
+Internal link: [[Main Page]]
+
+Internal with display text: [[Main Page|Go to Main Page]]
+
+=== Code ===
+
+Inline code: <code>console.log("Hello")</code>
+
+Code block:
+
+<pre>
+function greet(name) {
+  return "Hello, " + name + "!";
+}
+</pre>
+
+=== Tables ===
+
+{| class="wikitable"
+! Name !! Type !! Value !! Description
+|-
+| Item 1 || A || 100 || First item
+|-
+| Item 2 || B || 200 || Second item
+|-
+| Item 3 || C || 300 || Third item
+|}
+
+=== Blockquote ===
+
+<blockquote>
+This is a blockquote example. It can span multiple lines and is useful for quotations.
+</blockquote>
+
+=== Horizontal Rule ===
+
+Above the line
+
+----
+
+Below the line
+
+=== Combined Example ===
+
+Here's a paragraph with '''bold''', ''italic'', and [[Internal Link|links]] all together.
+
+* List item with '''bold text'''
+* Another item with ''italic''
+* Item with a [https://example.com link]
+
+<pre>
+Code can appear anywhere
+function example() {
+  return true;
+}
+</pre>
+
+=== Escaping ===
+
+Use <nowiki>{{{this}}}</nowiki> to prevent template parsing.
+
+Normal text without parsing: <nowiki>{{{no template here}}}</nowiki>
