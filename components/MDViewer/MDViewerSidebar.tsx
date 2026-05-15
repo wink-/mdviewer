@@ -80,7 +80,7 @@ export function MDViewerSidebar({
               No files loaded
             </p>
             <p className="text-xs text-muted-foreground mt-1">
-              Click "Open File" to get started
+              Click the Open File button to get started
             </p>
           </div>
         ) : (
