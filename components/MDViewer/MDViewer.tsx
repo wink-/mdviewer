@@ -12,6 +12,7 @@ import {
   FilePlus,
   Keyboard,
   Printer,
+  BookOpen,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useMarkdownFiles } from "@/hooks/useMarkdownFiles"
@@ -19,7 +20,11 @@ import { MDViewerSidebar } from "./MDViewerSidebar"
 import { MDViewerEditor } from "./MDViewerEditor"
 import { MDViewerPreview } from "./MDViewerPreview"
 import { cn } from "@/lib/utils"
-import { detectFormatByExtension, type ContentFormat } from "@/lib/mediawiki-parser"
+import {
+  getContentFormatInfo,
+  getFormatCheatsheet,
+  type ContentFormat,
+} from "@/lib/mediawiki-parser"
 import type { ViewMode } from "./types"
 
 export function MDViewer() {
@@ -34,70 +39,68 @@ export function MDViewer() {
     selectFile,
     closeFile,
     updateFileContent,
+    updateFileFormat,
   } = useMarkdownFiles()
 
   const [viewMode, setViewMode] = useState<ViewMode>("preview")
   const [sidebarOpen, setSidebarOpen] = useState(true)
-  const [editorContent, setEditorContent] = useState("")
   const [showKeyboardShortcuts, setShowKeyboardShortcuts] = useState(false)
-  const [saveStatus, setSaveStatus] = useState<"saved" | "saving" | "unsaved">("saved")
-  const [format, setFormat] = useState<ContentFormat>("markdown")
+  const [showCheatsheet, setShowCheatsheet] = useState(false)
+  const [cheatsheetFormat, setCheatsheetFormat] = useState<ContentFormat>("markdown")
+  const [isSaving, setIsSaving] = useState(false)
 
-  // Sync editor content and format with active file
-  useEffect(() => {
-    if (activeFile) {
-      setEditorContent(activeFile.content)
-      setSaveStatus(activeFile.isModified ? "unsaved" : "saved")
-      setFormat(detectFormatByExtension(activeFile.name))
-    } else {
-      setEditorContent("")
-    }
-  }, [activeFileId])
+  const activeFormat = activeFile?.format ?? "markdown"
+  const cheatsheet = getFormatCheatsheet(cheatsheetFormat)
 
-  // Handle keyboard shortcuts
+  const toggleCheatsheet = useCallback(() => {
+    setCheatsheetFormat(activeFormat)
+    setShowCheatsheet((prev) => !prev)
+  }, [activeFormat])
+
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      // Ctrl+S or Cmd+S - Save
       if ((e.ctrlKey || e.metaKey) && e.key === "s") {
         e.preventDefault()
         if (activeFile) {
-          setSaveStatus("saving")
-          saveFile(activeFile.id, editorContent).then((success) => {
-            setSaveStatus(success ? "saved" : "unsaved")
-          })
+          setIsSaving(true)
+          saveFile(activeFile.id, activeFile.content).then(() => setIsSaving(false))
         }
       }
 
-      // Ctrl+B or Cmd+B - Toggle sidebar
       if ((e.ctrlKey || e.metaKey) && e.key === "b") {
         e.preventDefault()
         setSidebarOpen((prev) => !prev)
       }
 
-      // Ctrl+E or Cmd+E - Switch to edit mode
       if ((e.ctrlKey || e.metaKey) && e.key === "e") {
         e.preventDefault()
         setViewMode("edit")
       }
 
-      // Ctrl+P or Cmd+P - Switch to preview mode
-      if ((e.ctrlKey || e.metaKey) && e.key === "p") {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === "p") {
         e.preventDefault()
-        setViewMode("preview")
+        setViewMode((current) => (current === "preview" ? "edit" : "preview"))
       }
 
-      // Ctrl+\ or Cmd+\ - Switch to split mode
+      if ((e.ctrlKey || e.metaKey) && e.key === "/") {
+        e.preventDefault()
+        toggleCheatsheet()
+      }
+
       if ((e.ctrlKey || e.metaKey) && e.key === "\\") {
         e.preventDefault()
         setViewMode("split")
       }
 
-      // Escape - Close keyboard shortcuts modal
-      if (e.key === "Escape" && showKeyboardShortcuts) {
-        setShowKeyboardShortcuts(false)
+      if (e.key === "Escape") {
+        if (showCheatsheet) {
+          setShowCheatsheet(false)
+        } else if (showKeyboardShortcuts) {
+          setShowKeyboardShortcuts(false)
+        }
       }
     },
-    [activeFile, editorContent, saveFile, showKeyboardShortcuts]
+    [activeFile, saveFile, showCheatsheet, showKeyboardShortcuts, toggleCheatsheet]
   )
 
   useEffect(() => {
@@ -105,40 +108,40 @@ export function MDViewer() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [handleKeyDown])
 
-  // Handle content changes
-  const handleContentChange = useCallback((value: string) => {
-    setEditorContent(value)
-    setSaveStatus("unsaved")
-    if (activeFile) {
-      updateFileContent(activeFile.id, value)
-    }
-  }, [activeFile, updateFileContent])
+  const handleContentChange = useCallback(
+    (value: string) => {
+      if (activeFile) {
+        updateFileContent(activeFile.id, value)
+      }
+    },
+    [activeFile, updateFileContent]
+  )
 
-  // Handle save
   const handleSave = useCallback(async () => {
-    if (activeFile) {
-      setSaveStatus("saving")
-      const success = await saveFile(activeFile.id, editorContent)
-      setSaveStatus(success ? "saved" : "unsaved")
-    }
-  }, [activeFile, editorContent, saveFile])
+    if (!activeFile) return
+    setIsSaving(true)
+    await saveFile(activeFile.id, activeFile.content)
+    setIsSaving(false)
+  }, [activeFile, saveFile])
 
-  // Create new file
   const handleNewFile = useCallback(() => {
-    const name = prompt("Enter file name (e.g., notes.md):")
+    const name = prompt("Enter file name (e.g., notes.md or notes.wiki):")
     if (name) {
       createFile(name)
       setViewMode("edit")
     }
   }, [createFile])
 
-  // Handle print — opens a clean window with just the content
   const handlePrint = useCallback(() => {
     const previewEl = document.querySelector("[data-preview-content]") || document.querySelector(".mediawiki-wrapper")
     const editorTextarea = document.querySelector("[data-view-mode] textarea") as HTMLTextAreaElement | null
 
+    const previewContent = previewEl?.querySelector("article, .mediawiki-wrapper") as HTMLElement | null
+
     let html: string
-    if (previewEl) {
+    if (previewContent) {
+      html = previewContent.outerHTML
+    } else if (previewEl) {
       html = previewEl.innerHTML
     } else if (editorTextarea) {
       html = `<pre style="font-family:monospace;font-size:13px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word">${escapeHtml(editorTextarea.value)}</pre>`
@@ -152,7 +155,7 @@ export function MDViewer() {
     printWindow.document.write(`<!DOCTYPE html>
 <html>
 <head>
-<title>${activeFile ? activeFile.name : "Print"}</title>
+<title>${escapeHtml(activeFile ? activeFile.name : "Print")}</title>
 <style>
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -223,7 +226,6 @@ export function MDViewer() {
 
   @page { size: letter; margin: 2cm; }
 
-  /* Hide the link-suffix on screen, only show in print */
   @media screen { a::after { content: none !important; } }
 </style>
 </head>
@@ -237,11 +239,9 @@ export function MDViewer() {
     }, 500)
   }, [activeFile])
 
-  // Empty state when no files are loaded
   if (files.length === 0) {
     return (
       <div className="flex h-screen">
-        {/* Sidebar */}
         <aside
           className={cn(
             "transition-all duration-300 ease-in-out bg-muted/30 border-r",
@@ -258,13 +258,12 @@ export function MDViewer() {
           />
         </aside>
 
-        {/* Empty State */}
         <main className="flex-1 flex items-center justify-center bg-background">
           <div className="text-center max-w-md p-8">
             <FileText className="h-20 w-20 mx-auto text-muted-foreground/50 mb-6" />
             <h2 className="text-2xl font-semibold mb-2">No Files Loaded</h2>
             <p className="text-muted-foreground mb-6">
-              Open a markdown file to get started with the MDViewer.
+              Open a Markdown or Wiki file to get started.
             </p>
             <div className="flex gap-3 justify-center">
               <Button onClick={loadFile} disabled={isLoading}>
@@ -284,7 +283,6 @@ export function MDViewer() {
 
   return (
     <div className="flex h-screen bg-background">
-      {/* Keyboard Shortcuts Modal */}
       {showKeyboardShortcuts && (
         <div
           className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
@@ -309,25 +307,80 @@ export function MDViewer() {
                 <kbd className="px-2 py-1 bg-muted rounded text-xs">Ctrl+E</kbd>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Preview mode</span>
-                <kbd className="px-2 py-1 bg-muted rounded text-xs">Ctrl+P</kbd>
+                <span className="text-muted-foreground">Preview / edit toggle</span>
+                <kbd className="px-2 py-1 bg-muted rounded text-xs">Ctrl+Shift+P</kbd>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Toggle cheatsheet</span>
+                <kbd className="px-2 py-1 bg-muted rounded text-xs">Ctrl+/</kbd>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Split mode</span>
                 <kbd className="px-2 py-1 bg-muted rounded text-xs">Ctrl+\</kbd>
               </div>
             </div>
-            <Button
-              className="w-full mt-6"
-              onClick={() => setShowKeyboardShortcuts(false)}
-            >
+            <Button className="w-full mt-6" onClick={() => setShowKeyboardShortcuts(false)}>
               Got it!
             </Button>
           </div>
         </div>
       )}
 
-      {/* Sidebar */}
+      {showCheatsheet && (
+        <div
+          className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={() => setShowCheatsheet(false)}
+        >
+          <div
+            className="bg-card border rounded-lg shadow-lg max-w-2xl w-full p-6 max-h-[85vh] overflow-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start justify-between gap-4 mb-4">
+              <div>
+                <h3 className="text-lg font-semibold">{cheatsheet.title}</h3>
+                <p className="text-sm text-muted-foreground mt-1">{cheatsheet.intro}</p>
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  variant={cheatsheetFormat === "markdown" ? "secondary" : "outline"}
+                  size="sm"
+                  onClick={() => setCheatsheetFormat("markdown")}
+                >
+                  Markdown
+                </Button>
+                <Button
+                  variant={cheatsheetFormat === "mediawiki" ? "secondary" : "outline"}
+                  size="sm"
+                  onClick={() => setCheatsheetFormat("mediawiki")}
+                >
+                  Wiki
+                </Button>
+              </div>
+            </div>
+
+            <div className="space-y-5">
+              {cheatsheet.sections.map((section) => (
+                <section key={section.title}>
+                  <h4 className="font-medium mb-3">{section.title}</h4>
+                  <div className="space-y-3">
+                    {section.items.map((item) => (
+                      <div key={item.syntax} className="grid gap-1 rounded-md border bg-muted/20 p-3">
+                        <code className="text-sm font-mono text-foreground">{item.syntax}</code>
+                        <p className="text-sm text-muted-foreground">{item.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
+
+            <Button className="w-full mt-6" onClick={() => setShowCheatsheet(false)}>
+              Close
+            </Button>
+          </div>
+        </div>
+      )}
+
       <aside
         className={cn(
           "transition-all duration-300 ease-in-out bg-muted/30 border-r flex flex-col",
@@ -344,12 +397,9 @@ export function MDViewer() {
         />
       </aside>
 
-      {/* Main Content */}
       <main className="flex-1 flex flex-col overflow-hidden">
-        {/* Toolbar */}
         <header className="flex items-center justify-between px-4 py-2 border-b bg-muted/30">
           <div className="flex items-center gap-2">
-            {/* Toggle Sidebar */}
             <Button
               variant="ghost"
               size="icon"
@@ -363,12 +413,11 @@ export function MDViewer() {
               )}
             </Button>
 
-            {/* File Name */}
             {activeFile && (
               <div className="flex items-center gap-2 px-3">
                 <FileText className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm font-medium">{activeFile.name}</span>
-                {saveStatus === "unsaved" && (
+                {activeFile.isModified && (
                   <span className="w-2 h-2 rounded-full bg-amber-500" />
                 )}
               </div>
@@ -376,28 +425,36 @@ export function MDViewer() {
           </div>
 
           <div className="flex items-center gap-1">
-            {/* Format Toggle */}
             {activeFile && (
-              <div className="flex items-center border-r mr-2 pr-2">
+              <div className="flex items-center border-r mr-2 pr-2 gap-1">
                 <Button
-                  variant={format === "markdown" ? "secondary" : "ghost"}
+                  variant={activeFormat === "markdown" ? "secondary" : "ghost"}
                   size="sm"
-                  onClick={() => setFormat("markdown")}
-                  title="Markdown"
+                  onClick={() => updateFileFormat(activeFile.id, "markdown")}
+                  title={getContentFormatInfo("markdown").description}
                 >
                   MD
                 </Button>
                 <Button
-                  variant={format === "mediawiki" ? "secondary" : "ghost"}
+                  variant={activeFormat === "mediawiki" ? "secondary" : "ghost"}
                   size="sm"
-                  onClick={() => setFormat("mediawiki")}
-                  title="MediaWiki"
+                  onClick={() => updateFileFormat(activeFile.id, "mediawiki")}
+                  title={getContentFormatInfo("mediawiki").description}
                 >
                   Wiki
                 </Button>
               </div>
             )}
-            {/* View Mode Buttons */}
+
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleCheatsheet}
+              title="Toggle cheatsheet (Ctrl+/)"
+            >
+              <BookOpen className="h-4 w-4" />
+            </Button>
+
             <div className="flex items-center border-r mr-2 pr-2">
               <Button
                 variant={viewMode === "edit" ? "secondary" : "ghost"}
@@ -410,8 +467,8 @@ export function MDViewer() {
               <Button
                 variant={viewMode === "preview" ? "secondary" : "ghost"}
                 size="sm"
-                onClick={() => setViewMode("preview")}
-                title="Preview Mode (Ctrl+P)"
+                onClick={() => setViewMode((current) => (current === "preview" ? "edit" : "preview"))}
+                title="Preview / edit toggle (Ctrl+Shift+P)"
               >
                 <Eye className="h-4 w-4" />
               </Button>
@@ -425,46 +482,30 @@ export function MDViewer() {
               </Button>
             </div>
 
-            {/* Save Button */}
             {activeFile && viewMode !== "preview" && (
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handleSave}
-                disabled={saveStatus === "saving"}
+                disabled={isSaving}
                 title="Save (Ctrl+S)"
               >
                 <Save className="h-4 w-4 mr-1" />
-                <span className="hidden sm:inline">
-                  {saveStatus === "saving" ? "Saving..." : "Save"}
-                </span>
+                <span className="hidden sm:inline">{isSaving ? "Saving..." : "Save"}</span>
               </Button>
             )}
 
-            {/* Print Button */}
             {activeFile && (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handlePrint}
-                title="Print"
-              >
+              <Button variant="outline" size="sm" onClick={handlePrint} title="Print">
                 <Printer className="h-4 w-4 mr-1" />
                 <span className="hidden sm:inline">Print</span>
               </Button>
             )}
 
-            {/* New File Button */}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleNewFile}
-              title="New File"
-            >
+            <Button variant="outline" size="sm" onClick={handleNewFile} title="New File">
               <FilePlus className="h-4 w-4" />
             </Button>
 
-            {/* Keyboard Shortcuts Button */}
             <Button
               variant="ghost"
               size="icon"
@@ -476,9 +517,7 @@ export function MDViewer() {
           </div>
         </header>
 
-        {/* Content Area */}
         <div data-view-mode={viewMode} className="flex-1 flex overflow-hidden">
-          {/* Editor */}
           {(viewMode === "edit" || viewMode === "split") && (
             <div
               data-editor
@@ -489,9 +528,11 @@ export function MDViewer() {
             >
               {activeFile ? (
                 <MDViewerEditor
-                  value={editorContent}
+                  value={activeFile.content}
                   onChange={handleContentChange}
-                  format={format}
+                  format={activeFormat}
+                  sourceLabel="Source of truth"
+                  sourceDescription="Edit here; preview stays derived."
                 />
               ) : (
                 <div className="flex items-center justify-center h-full text-muted-foreground">
@@ -501,7 +542,6 @@ export function MDViewer() {
             </div>
           )}
 
-          {/* Preview */}
           {(viewMode === "preview" || viewMode === "split") && (
             <div
               className={cn(
@@ -510,9 +550,10 @@ export function MDViewer() {
               )}
             >
               <MDViewerPreview
-                content={editorContent}
-                fileName={activeFile?.name}
-                forceFormat={format}
+                content={activeFile?.content ?? ""}
+                forceFormat={activeFormat}
+                sourceLabel="Derived view"
+                sourceDescription="Preview updates from the editor's canonical text."
               />
             </div>
           )}
@@ -527,5 +568,6 @@ function escapeHtml(text: string): string {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
+    .replace(/\"/g, "&quot;")
+    .replace(/'/g, "&#039;")
 }

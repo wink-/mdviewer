@@ -5,10 +5,149 @@
 
 export type ContentFormat = 'markdown' | 'mediawiki';
 
+export interface FormatCheatsheetItem {
+  syntax: string;
+  description: string;
+}
+
+export interface FormatCheatsheetSection {
+  title: string;
+  items: FormatCheatsheetItem[];
+}
+
+export interface ContentFormatInfo {
+  format: ContentFormat;
+  label: string;
+  description: string;
+  extensions: string[];
+  mimeType: string;
+}
+
+export const CONTENT_FORMATS: Record<ContentFormat, ContentFormatInfo> = {
+  markdown: {
+    format: 'markdown',
+    label: 'Markdown',
+    description: 'Lightweight Markdown for notes, docs, and README-style files.',
+    extensions: ['.md', '.markdown'],
+    mimeType: 'text/markdown',
+  },
+  mediawiki: {
+    format: 'mediawiki',
+    label: 'Wiki',
+    description: 'MediaWiki / wiki text with page links, tables, and classic wiki markup.',
+    extensions: ['.wiki', '.mediawiki', '.wikitext', '.wt'],
+    mimeType: 'text/plain',
+  },
+};
+
+export const CONTENT_CHEATSHEETS: Record<ContentFormat, {
+  title: string;
+  intro: string;
+  sections: FormatCheatsheetSection[];
+}> = {
+  markdown: {
+    title: 'Markdown cheatsheet',
+    intro: 'Common Markdown patterns you can use right away.',
+    sections: [
+      {
+        title: 'Headings and emphasis',
+        items: [
+          { syntax: '# H1', description: 'Heading levels use one to six # symbols.' },
+          { syntax: '**bold** / *italic*', description: 'Bold and italic text.' },
+          { syntax: '`inline code`', description: 'Inline code snippets.' },
+        ],
+      },
+      {
+        title: 'Lists and links',
+        items: [
+          { syntax: '- item', description: 'Bulleted list items.' },
+          { syntax: '1. item', description: 'Numbered list items.' },
+          { syntax: '[label](https://example.com)', description: 'Link to a page or site.' },
+        ],
+      },
+      {
+        title: 'Extras',
+        items: [
+          { syntax: '| col | col |', description: 'Tables with pipe syntax.' },
+          { syntax: '> quote', description: 'Blockquotes.' },
+          { syntax: '```code```', description: 'Fenced code blocks.' },
+        ],
+      },
+    ],
+  },
+  mediawiki: {
+    title: 'Wiki cheatsheet',
+    intro: 'Classic wiki / MediaWiki markup for pages, links, and tables.',
+    sections: [
+      {
+        title: 'Headings and emphasis',
+        items: [
+          { syntax: '== Heading ==', description: 'Section headings are wrapped in equal signs.' },
+          { syntax: "''italic'' / '''bold'''", description: 'Italic and bold text.' },
+          { syntax: '[[Page Name]]', description: 'Internal wiki links.' },
+        ],
+      },
+      {
+        title: 'Lists and references',
+        items: [
+          { syntax: '* item', description: 'Bulleted list items.' },
+          { syntax: '# item', description: 'Numbered list items.' },
+          { syntax: '[https://example.com label]', description: 'External link with label.' },
+        ],
+      },
+      {
+        title: 'Tables and media',
+        items: [
+          { syntax: '{| ... |}', description: 'Wiki tables.' },
+          { syntax: '|- / ! / |', description: 'Row and cell markers inside tables.' },
+          { syntax: '[[File:Example.png]]', description: 'Embed an image or file reference.' },
+        ],
+      },
+    ],
+  },
+};
+
+export function getContentFormatInfo(format: ContentFormat): ContentFormatInfo {
+  return CONTENT_FORMATS[format];
+}
+
+export function getFormatCheatsheet(format: ContentFormat) {
+  return CONTENT_CHEATSHEETS[format];
+}
+
 export function detectFormatByExtension(filename: string): ContentFormat {
   if (!filename) return 'markdown';
   const ext = filename.toLowerCase().split('.').pop() || '';
-  return ['wiki', 'mediawiki', 'wikitext', 'wt'].includes(ext) ? 'mediawiki' : 'markdown';
+  return CONTENT_FORMATS.mediawiki.extensions.some((extension) => extension.slice(1) === ext)
+    ? 'mediawiki'
+    : 'markdown';
+}
+
+export function detectFormatByContent(content: string, filename?: string): ContentFormat {
+  if (filename) {
+    const lowerName = filename.toLowerCase()
+    const matchingFormat = (Object.entries(CONTENT_FORMATS) as [ContentFormat, ContentFormatInfo][]).find(
+      ([, formatInfo]) => formatInfo.extensions.some((extension) => lowerName.endsWith(extension))
+    )
+
+    if (matchingFormat) {
+      return matchingFormat[0]
+    }
+  }
+
+  const wikiSignals = [
+    /^={2,6}\s*.+?\s*={2,6}$/m,
+    /^\{\|/m,
+    /^\s*[:*]{2,}\s+\S/m,
+    /\[\[(?:File|Image):/i,
+    /\[\[[^\]]+\]\]/,
+  ]
+
+  if (wikiSignals.some((pattern) => pattern.test(content))) {
+    return 'mediawiki'
+  }
+
+  return 'markdown'
 }
 
 export function parseMediaWiki(content: string): string {
@@ -115,9 +254,7 @@ class MediaWikiParser {
     this.closeDefinitionList();
     this.inTable = true;
     this.tableCurrentRow = [];
-    const rest = match[1];
-    const attrs = rest.replace(/^\{\|\s*/, '').trim();
-    this.result.push(`<table ${attrs || 'class="wikitable border border-border"'}>`);
+    this.result.push('<table class="wikitable border border-border">');
     return true;
   }
 
@@ -161,7 +298,7 @@ class MediaWikiParser {
     for (const cell of cells) {
       if (!cell) continue;
 
-      const { attrs, content: cellContent } = this.splitCellAttrs(cell);
+      const { content: cellContent } = this.splitCellAttrs(cell);
       const processed = this.processInline(cellContent);
       const tag = isHeader ? 'th' : 'td';
       const cls = isHeader
@@ -169,7 +306,7 @@ class MediaWikiParser {
         : 'border border-border px-3 py-2';
 
       this.tableCurrentRow.push(
-        `<${tag} ${attrs} class="${cls}">${processed}</${tag}>`
+        `<${tag} class="${cls}">${processed}</${tag}>`
       );
     }
 
@@ -238,25 +375,33 @@ class MediaWikiParser {
     const content = match[2];
     const level = markers.length;
     const type = markers[level - 1] === '*' ? 'ul' : 'ol';
+    const top = () => this.listStack[this.listStack.length - 1]
 
-    while (this.listStack.length > 0 && this.listStack[this.listStack.length - 1].level >= level) {
-      const item = this.listStack.pop()!;
-      if (item.type === 'li') this.result.push('</li>');
-      this.result.push(`</${item.listType}>`);
+    while (top() && top()!.level > level) {
+      const item = this.listStack.pop()!
+      if (item.type === 'li') this.result.push('</li>')
+      else this.result.push(`</${item.listType}>`)
     }
 
-    if (this.listStack.length === 0 || this.listStack[this.listStack.length - 1].level < level) {
-      this.result.push(`<${type} class="pl-6 my-1${type === 'ul' ? ' list-disc' : ' list-decimal'}">`);
-      this.listStack.push({ level, listType: type, type: 'list' });
+    if (top() && top()!.level === level && top()!.type === 'li') {
+      const item = this.listStack.pop()!
+      this.result.push('</li>')
+      void item
     }
 
-    if (this.listStack.length > 0 && this.listStack[this.listStack.length - 1].type === 'li') {
-      this.result.push('</li>');
+    if (top() && top()!.level === level && top()!.type === 'list' && top()!.listType !== type) {
+      const item = this.listStack.pop()!
+      this.result.push(`</${item.listType}>`)
     }
 
-    this.result.push(`<li>${this.processInline(content)}`);
-    this.listStack.push({ level, listType: type, type: 'li' });
-    return true;
+    if (!top() || top()!.level < level || (top()!.level === level && top()!.type === 'list' && top()!.listType !== type)) {
+      this.result.push(`<${type} class="pl-6 my-1${type === 'ul' ? ' list-disc' : ' list-decimal'}">`)
+      this.listStack.push({ level, listType: type, type: 'list' })
+    }
+
+    this.result.push(`<li>${this.processInline(content)}`)
+    this.listStack.push({ level, listType: type, type: 'li' })
+    return true
   }
 
   private closeLists() {
@@ -272,7 +417,7 @@ class MediaWikiParser {
     if (!match) return false;
 
     const colons = match[1].length;
-    let content = match[2];
+    const content = match[2];
 
     if (!this.inDefinitionList) {
       this.result.push('<dl class="my-2 ml-4">');
@@ -311,16 +456,17 @@ class MediaWikiParser {
   }
 
   private processInline(text: string): string {
-    let result = text;
+    let result = text.replace(/<!--[\s\S]*?-->/g, '');
 
-    // HTML comments (remove)
-    result = result.replace(/<!--[\s\S]*?-->/g, '');
+    // Escape raw HTML first so only the wiki syntax we explicitly render can
+    // become markup. This keeps the parser safe for direct innerHTML usage.
+    result = escapeHtmlText(result);
 
     // Images before links (otherwise [[Image:...]] gets consumed by link handler)
     result = result.replace(/\[\[(?:Image|File):([^\]|]+)(\|[^\]]*)?\]\]/gi,
       (_match, filename: string, options?: string) => {
         const alt = options ? options.replace(/^\|/, '').split('|')[0] || filename : filename;
-        return `<img src="/images/${encodeURIComponent(filename)}" alt="${escapeHtml(alt)}" class="wiki-image rounded-lg shadow-md my-2" />`;
+        return `<img src="/images/${encodeURIComponent(filename)}" alt="${escapeHtmlAttribute(alt)}" class="wiki-image rounded-lg shadow-md my-2" />`;
       }
     );
 
@@ -333,6 +479,13 @@ class MediaWikiParser {
     // Italic: ''text''
     result = result.replace(/''(.+?)''/g, '<em>$1</em>');
 
+    // External links with double brackets and label: [[url text]] (MediaWiki syntax)
+    result = result.replace(/\[\[(https?:\/\/[^\s\]]+)\s+([^\]]+)\]\]/g,
+      (_match, url: string, label: string) => {
+        return `<a href="${escapeHtmlAttribute(url)}" class="wiki-link-external text-primary hover:underline" target="_blank" rel="noopener noreferrer">${label}</a>`;
+      }
+    );
+
     // Internal links: [[Page]], [[Page|Text]], [[Page#Section|Text]]
     result = result.replace(/\[\[([^\]|#]+)(#[^\]|]+)?(\|([^\]]+))?\]\]/g,
       (_match, page: string, section?: string, _?: string, display?: string) => {
@@ -342,32 +495,40 @@ class MediaWikiParser {
       }
     );
 
-    // External links with double brackets and label: [[url text]] (MediaWiki syntax)
-    result = result.replace(/\[\[(https?:\/\/[^\s\]]+)\s+([^\]]+)\]\]/g,
-      '<a href="$1" class="wiki-link-external text-primary hover:underline" target="_blank" rel="noopener noreferrer">$2</a>'
-    );
-
     // External links with single brackets and label: [url label]
     result = result.replace(/\[(https?:\/\/[^\s]+)\s+([^\]]+)\]/g,
-      '<a href="$1" class="wiki-link-external text-primary hover:underline" target="_blank" rel="noopener noreferrer">$2</a>'
+      (_match, url: string, label: string) => {
+        return `<a href="${escapeHtmlAttribute(url)}" class="wiki-link-external text-primary hover:underline" target="_blank" rel="noopener noreferrer">${label}</a>`;
+      }
     );
 
     // Bare external links: [url]
     result = result.replace(/\[(https?:\/\/[^\s]+)\]/g,
-      '<a href="$1" class="wiki-link-external text-primary hover:underline" target="_blank" rel="noopener noreferrer">$1</a>'
+      (_match, url: string) => {
+        return `<a href="${escapeHtmlAttribute(url)}" class="wiki-link-external text-primary hover:underline" target="_blank" rel="noopener noreferrer">${url}</a>`;
+      }
     );
 
     return result;
   }
 }
 
+function escapeHtmlText(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function escapeHtmlAttribute(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 function escapeHtml(text: string): string {
-  const map: Record<string, string> = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;'
-  };
-  return text.replace(/[&<>"']/g, (m) => map[m]);
+  return escapeHtmlAttribute(text);
 }

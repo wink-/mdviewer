@@ -14,8 +14,9 @@ A modern web-based markdown and MediaWiki viewer/editor built with Next.js 16, R
   - `Ctrl+S` - Save file
   - `Ctrl+B` - Toggle sidebar
   - `Ctrl+E` - Edit mode
-  - `Ctrl+P` - Preview mode
-  - `Ctrl+\` - Split mode
+  - `Ctrl+Shift+P` - Preview/edit toggle
+  - `Ctrl+\\` - Split mode
+- **Format Cheatsheets**: One-click help for Markdown and Wiki syntax
 
 ## Getting Started
 
@@ -23,13 +24,13 @@ A modern web-based markdown and MediaWiki viewer/editor built with Next.js 16, R
 
 ```bash
 cd mdviewer
-npm install
+pnpm install
 ```
 
 ### Development
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -37,8 +38,15 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ### Build for Production
 
 ```bash
-npm run build
-npm start
+pnpm run build
+pnpm start
+```
+
+### Testing
+
+```bash
+pnpm test
+pnpm lint
 ```
 
 ## Tech Stack
