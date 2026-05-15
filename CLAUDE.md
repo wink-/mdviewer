@@ -22,7 +22,7 @@ Next.js 16 App Router app. Single-page client-only app — the root `page.tsx` r
 
 ### Format detection and rendering
 
-`MDViewerPreview` detects whether content is Markdown or MediaWiki using `lib/mediawiki-parser.ts` utilities (`detectFormatByExtension`, `detectFormatByContent`). MediaWiki content is delegated to `MediaWikiPreview`, which uses a custom line-by-line parser (no external library — the `wiky` dependency exists but is not imported). Markdown uses `react-markdown` with remark-gfm, remark-frontmatter, and rehype-highlight.
+`MDViewerPreview` detects whether content is Markdown or MediaWiki using `lib/mediawiki-parser.ts` utilities (`detectFormatByExtension`, `detectFormatByContent`). MediaWiki content is delegated to `MediaWikiPreview`, which uses a custom line-by-line parser with no external library. Markdown uses `react-markdown` with remark-gfm, remark-frontmatter, and rehype-highlight.
 
 ### Key files
 

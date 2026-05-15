@@ -27,6 +27,10 @@ cd mdviewer
 pnpm install
 ```
 
+If pnpm reports ignored build scripts on a fresh machine, the repo includes
+`pnpm-workspace.yaml` with the required build approvals for `msw`, `sharp`, and
+`unrs-resolver`.
+
 ### Development
 
 ```bash
