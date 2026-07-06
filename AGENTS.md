@@ -3,3 +3,12 @@
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
+
+<!-- BEGIN:PROJECTS-DOCS -->
+## Project Docs
+
+- Start with `docs/index.md` for the OKF documentation map.
+- Keep `docs/status.md` current when project phase, blockers, or next tasks change.
+- Record significant documentation/project changes in `docs/log.md`.
+- Follow the existing Next.js 16 guidance above before changing application code.
+<!-- END:PROJECTS-DOCS -->
