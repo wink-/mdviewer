@@ -36,3 +36,8 @@ pnpm run build
 ```
 
 For documentation-only changes, lightweight validation can use JSON/config checks and `git status` when dependencies are not installed.
+
+```bash
+node -e "JSON.parse(require('fs').readFileSync('package.json', 'utf8'))"
+git diff --check
+```

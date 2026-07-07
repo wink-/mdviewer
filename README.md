@@ -2,6 +2,17 @@
 
 A modern web-based markdown and MediaWiki viewer/editor built with Next.js 16, React 19, and shadcn/ui.
 
+<!-- PROJECT-DOCS:START -->
+## Project Docs
+
+- [Documentation index](docs/index.md)
+- [Architecture](docs/architecture.md)
+- [Setup](docs/setup.md)
+- [Status](docs/status.md)
+- [Notes](docs/notes.md)
+- [Log](docs/log.md)
+<!-- PROJECT-DOCS:END -->
+
 ## Features
 
 - **Dual Format Support**: View and edit both Markdown (.md) and MediaWiki (.wiki) files
